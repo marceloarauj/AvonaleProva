@@ -1,0 +1,57 @@
+﻿@model RepositoriosInfo
+@{
+    ViewData["Title"] = "Repositorio";
+
+    @using Newtonsoft.Json;
+
+    dynamic json  = JsonConvert.DeserializeObject(ViewBag.RepositorioProxPagina);
+
+    string nome = json.Nome;
+    string autor = json.CriadorReposit;
+    string linguagem = json.Linguagem;
+    string descricao = json.Descricao;
+    string lastView = json.UltimaData;
+
+    <script type="text/javascript">
+        var dados_repositorio = '@ViewBag.RepositorioProxPagina';
+        var teste_repositorio = JSON.parse(dados_repositorio.replace(/&quot;/g, '"'));
+
+    </script>
+    <link rel="stylesheet" href="~/css/site.css">
+}
+
+<div style="border: 2px solid black; border-radius: 4px; margin-top:20px; padding:10px;">
+    
+    <h1>Informações do Repositorio</h1>
+
+    <h2 id="nome">Nome: @nome</h2>
+    <h2 id="autor">Autor:@autor  </h2>
+    <h2>Linguagem: @linguagem</h2>
+    <h2 id="descricao">Descrição: @descricao</h2>
+    <h2 id="visualizacao">Última Atualização: @lastView</h2>
+
+    <button id="favoritar">Favoritar</button>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            url_favoritar = '@Url.Action("Favoritar", "Github")';
+
+            $('#favoritar').removeAttr('disabled');
+
+            $('#favoritar').click(function () {
+
+                $('#favoritar').attr('disabled', 'disabled');
+                $.ajax({
+                    method: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: url_favoritar,
+                    data: JSON.stringify({ Nome: '@nome', Descricao: '@descricao', CriadorReposit: '@autor', UltimaData: '@lastView' }),
+                    success: alert('SALVO EM FAVORITOS')
+                }); // send ajax
+            });
+    });
+    </script>
+</div>
+

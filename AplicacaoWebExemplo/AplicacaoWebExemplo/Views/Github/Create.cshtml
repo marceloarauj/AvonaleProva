@@ -1,0 +1,80 @@
+﻿@model RepositoriosInfo
+@{
+    ViewData["Title"] = "GET- Aplication";
+
+    <script type="text/javascript">
+
+        var srt = '@ViewData["RepositoriosInfo"]';
+        var teste = JSON.parse(srt.replace(/&quot;/g, '"'));
+
+        var string = '@Url.Action("Repositorio", "Github")';
+
+    </script>
+    <link rel="stylesheet" href="~/css/site.css">
+    <script src="~/js/site.js"></script>
+   
+}
+ 
+<div id="menu" class="container font-weight-bold " style="border-radius:4px; margin-top:15px;width:980px">
+    <section>
+        <div id="div1" style="width:900px; height:200px; overflow-y:auto">
+            <h3>Meus Repositórios</h3>
+            <input id="usuario" type="text" placeholder="Nome do usuário git" />
+            <button id="myreps" class="btn-dark">OK</button>
+
+            <table class="table table-dark table-hover align-items-center data">
+                <thead>
+                    <tr>
+                        <td>Repositórios</td>
+                    </tr>
+                </thead>
+                <tbody id="reps"></tbody>
+
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <div id="div2" style="width:900px; height:200px; overflow-y:auto">
+            <h3>Procurar Repositórios</h3>
+            <input id="buscar_rep" type="text" placeholder="repositório" />
+            <button id="allreps" class="btn-dark">OK</button>
+
+            <table class="table table-dark table-hover align-items-center data">
+                <thead>
+                    <tr>
+                        <td>Buscas</td>
+                    </tr>
+                </thead>
+                <tbody id="search_reps"></tbody>
+
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <div id="div3" style="width:900px; height:720px; overflow-y:auto">
+            <h3>Repositórios Favoritos</h3>
+
+
+            <table class="table table-dark table-hover align-items-center">
+                <thead>
+                    <tr>
+                        <td>Repositórios Favoritos</td>
+                    </tr>
+                </thead>
+                <tbody id="fav_reps">
+                    <tr>
+                        <td>Nome</td>
+                        <td>Descrição</td>
+                        <td>Autor</td>
+                        <td>Último Acesso</td>
+                    </tr>
+                
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+
+</div>
